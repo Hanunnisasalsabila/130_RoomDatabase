@@ -1,19 +1,21 @@
 package com.example.praktikum8.viewmodel.provider
 
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.praktikum8.repositori.AplikasiSiswa
 import com.example.praktikum8.viewmodel.EntryViewModel
 import com.example.praktikum8.viewmodel.HomeViewModel
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
         initializer {
-            HomeViewModel(AplikasiSiswa().container.repositoriSiswa)
+            val application = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as AplikasiSiswa
+            HomeViewModel(application.container.repositoriSiswa)
         }
         initializer {
-            EntryViewModel(AplikasiSiswa().container.repositoriSiswa)
+            val application = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as AplikasiSiswa
+            EntryViewModel(application.container.repositoriSiswa)
         }
     }
 }
