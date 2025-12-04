@@ -14,14 +14,14 @@ interface SiswaDao {
     fun getAllSiswa(): Flow<List<Siswa>>
 
     @Insert (onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(siswa:Siswa)
+    suspend fun insert(siswa: Siswa)
 
-    @Query( "SELECT * from tblSiswa WHERE id = :id")
-    fun getSiswa(id: Int): Flow<Siswa>
-
-    @Delete
-    suspend fun delete(siswa: Siswa)
+    @Query(value = "SELECT * from tblSiswa WHERE id = :id")
+    fun getSiswa(id: Int): Flow<Siswa?>
 
     @Update
     suspend fun update(siswa: Siswa)
+
+    @Delete
+    suspend fun delete(siswa: Siswa)
 }
