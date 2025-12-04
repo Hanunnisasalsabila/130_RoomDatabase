@@ -8,31 +8,33 @@ import com.example.praktikum8.viewmodel.HomeViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.example.praktikum8.view.DetailDataSiswa
 import com.example.praktikum8.viewmodel.DetailViewModel
+import com.example.praktikum8.viewmodel.EditViewModel
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
 
-        // HAPUS BARIS INI: val aplikasiSiswa = this.aplikasiSiswa()
-
         initializer {
-            // Pindah variabel ke sini, di mana 'this' adalah CreationExtras
-            val aplikasiSiswa = this.aplikasiSiswa()
             HomeViewModel(
-                aplikasiSiswa.container.repositoriSiswa
+                aplikasiSiswa().container.repositoriSiswa
             )
         }
         initializer {
-            // Ulangi untuk EntryViewModel
-            val aplikasiSiswa = this.aplikasiSiswa()
             EntryViewModel(
-                aplikasiSiswa.container.repositoriSiswa
+                aplikasiSiswa().container.repositoriSiswa
             )
         }
         initializer {
-            DetailViewModel(this.createSavedStateHandle(),
-                aplikasiSiswa().container.repositoriSiswa)
+            DetailViewModel(
+                this.createSavedStateHandle(),
+                aplikasiSiswa().container.repositoriSiswa
+            )
+        }
+        initializer {
+            EditViewModel(
+                this.createSavedStateHandle(),
+                aplikasiSiswa().container.repositoriSiswa
+            )
         }
     }
 }
